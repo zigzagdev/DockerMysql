@@ -1,0 +1,22 @@
+version: '2'
+services:
+  mysql:
+    build: .
+    tty: true
+    working_dir: /mnt
+    volumes:
+      - ./:/mnt/
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: root
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 7040:80
+    volumes:
+      - ./phpmyadmin/sessions:/sessions
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: root
